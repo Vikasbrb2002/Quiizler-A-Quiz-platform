@@ -4,14 +4,16 @@
 
 import React from "react";
 import { LampDemo } from "@/components/ui/lamp"; // Import the LampDemo component
-import Link from "next/link";
+import StudentComponent from "../components/ui/student";
 
+import  Footer  from "@/components/ui/footer"
+import AboutPage from "./about/page";
 export default function Home() {
   return (
-   <div>   
-
-      {/* LampDemo Component */}
+   <div>
       <LampDemo /> {/* This will render the LampDemo with LampContainer */}
+      <StudentComponent />
+      <AboutPage/>
       
     </div>
   );

@@ -1,24 +1,28 @@
-"use client"; // Ensure client-side rendering
+"use client";
 
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn"; // Assuming cn utility is used for merging class names
 import Link from "next/link";
+import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 
 // Main LampDemo Component
 export function LampDemo() {
   return (
     <>
-      {/* Sign Up and Login Buttons at the top-right corner of the screen */}
+      {/* Logo and App Name */}
+      <div className="absolute top-4 left-8 flex items-center gap-2 z-50">
+        <img src="/quiizler.png" alt="Quiizler Logo" className="w-12 h-12" />
+        <span className="text-white text-xl font-semibold">Quiizler Quiz App</span>
+      </div>
+
+      {/* Sign Up and Login Buttons */}
       <div className="fixed top-4 right-4 flex gap-4 z-50">
-        {/* Sign Up Button */}
         <Link href="/Signup">
-          <button className="bg-white text-black hover:bg-gray-100 border-2 border-gray-300 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-6 rounded-lg font-medium shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+          <button className="bg-black text-white hover:bg-black-100 border-2 border-gray-300 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-6 rounded-lg font-medium shadow-md transition duration-300 ease-in-out transform hover:scale-105">
             Sign Up
           </button>
         </Link>
-
-        {/* Login Button */}
         <Link href="/Login">
           <button className="bg-white text-black hover:bg-gray-100 border-2 border-gray-300 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-6 rounded-lg font-medium shadow-md transition duration-300 ease-in-out transform hover:scale-105">
             Login
@@ -26,9 +30,8 @@ export function LampDemo() {
         </Link>
       </div>
 
-      {/* LampContainer Component */}
+      {/* LampContainer */}
       <LampContainer>
-        {/* Image Below Heading */}
         <motion.div
           initial={{ opacity: 0.5, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,16 +40,16 @@ export function LampDemo() {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="mt-5"
+          className="mt-40"
         >
           <img
-            src="/online test.svg" // Replace with your image path
+            src="/online test.svg"
             alt="Inspirational Pathway"
             className="w-72 rounded-lg shadow-lg md:w-90"
           />
         </motion.div>
 
-        {/* Text Messages Below the Image */}
+        {/* Typewriter Effect */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,21 +58,42 @@ export function LampDemo() {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="mt-8 text-center space-y-4"
+          className="mt-10"
+        >
+          <TypewriterEffectSmoothDemo />
+        </motion.div>
+
+        {/* Text Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.9,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="mt-10 text-center space-y-4"
         >
           <h2 className="text-3xl font-bold text-slate-100 md:text-5xl">
             "Test Your Knowledge"
           </h2>
-          <p className="text-lg text-slate-300 md:text-xl">
+          <p className="text-lg text-slate-300 md:text-xl pb-6">
             Unlock your potential with our interactive quizzes and challenges.
           </p>
-          <p className="text-base text-slate-400 md:text-lg">
-            Whether you're preparing for exams, brushing up on general knowledge, 
-            or simply having fun, we have a quiz for you!
-          </p>
-          <p className="text-sm text-slate-500">
-            Explore categories like Science, Math, History, and more!
-          </p>
+        </motion.div>
+
+        {/* TabsDemo Component */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 1.2,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="w-full mt-12"
+        >
+         
         </motion.div>
       </LampContainer>
     </>
@@ -81,7 +105,7 @@ export const LampContainer = ({ children, className }) => {
   return (
     <div
       className={cn(
-        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
+        "relative flex min-h-screen flex-col items-center justify-start overflow-hidden bg-slate-950 w-full rounded-md z-0 pt-10",
         className
       )}
     >
@@ -129,3 +153,28 @@ export const LampContainer = ({ children, className }) => {
     </div>
   );
 };
+
+// TypewriterEffectSmoothDemo Component
+export function TypewriterEffectSmoothDemo() {
+  const words = [
+    { text: "Welcome" },
+    { text: "to" },
+    { text: "the" },
+    { text: "Platform" },
+    { text: "Quiizler", className: "text-blue-500 dark:text-blue-500" },
+  ];
+
+  return (
+    <div className="flex flex-col items-center justify-center h-[10rem]">
+      <TypewriterEffectSmooth
+        words={words} // Pass each word with its styling directly
+      />
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
+        <button className="bg-black text-white hover:bg-black-100 border-2 border-gray-300 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 py-2 px-6 rounded-lg font-medium shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+          Explore now
+        </button>
+      </div>
+    </div>
+  );
+}
+
